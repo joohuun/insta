@@ -17,26 +17,109 @@
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
           rel="stylesheet">
 
-    <title>Hello, world!</title>
+    <!-- Optional JavaScript; choose one of the two! -->
 
-<!--    <style>-->
-<!--        .navbar navbar-expand-lg navbar-light bg-light {-->
-<!--            position: fixed;-->
-<!--            width: 100%;-->
-<!--        }-->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
-<!--    </style>-->
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
 
+    <title>instagram</title>
+
+    <style>
+        .navbar navbar-expand-lg navbar-light bg-light {
+            /*position: fixed;*/
+            width: 100%;
+        }
+
+        .search-box {
+            width: 400px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(234, 224, 224, 0.72);
+        }
+
+        .container-fluid {
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            min-width: 800px;
+            background-color: blue;
+            position: fixed;
+            /*margin-top: px;*/
+            padding-top: 50px;
+            height: 15%;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            justify-content: center;
+            padding-top: 3.5%;
+            background-color: white
+        }
+
+        .card_wrap {
+            width: 600px;
+            height: 1000px;
+            background-color: white;
+            margin-right: 256px
+        }
+
+        .cards {
+            border: solid 1px;
+            border-color: #e1dbdb;
+            border-radius: 3px
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            border-radius: 70%;
+            overflow: hidden;
+            margin: 1% 0 0 1%;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .profile_img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .recommend_follow {
+            width: 400px;
+            height: 1000px;
+            background-color: gray;
+            position: fixed;
+            left: 62%
+        }
+    /*테스트123*/
+    </style>
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; width: 100%;">
-    <div class="container-fluid"
-         style="justify-content: space-between;flex-wrap: nowrap; min-width: 800px; background-color: white;">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img style="width: 100px"
                  src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png">
         </a>
-        <input class="form-control me-2" style="width: 400px" type="search" placeholder="Search" aria-label="Search">
+        <input class="search-box" type="search" placeholder="Search" aria-label="Search">
         <div>
             <span class="material-icons">home</span>
             <span class="material-icons-outlined">send</span>
@@ -48,17 +131,27 @@
     </div>
 </nav>
 
-<div style="display:flex;flex-direction:row;text-align: center; justify-content: center; padding-top: 60px; background-color: white">
-    <div style="width: 600px; height: 1000px; background-color: white; margin-right: 256px">
-        <div class="story" style="border: solid 1px; border-color: #e1dbdb; border-radius: 3px">
-            <div>1</div>
-            <div>1</div>
+<div class="main">
+    <div class="card_wrap">
+        <div class="cards ">
+            <div class="profile">
+                <div class="box">
+                    <img class="profile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div calss="profile_name">
+                    김주훈
+                </div>
+            </div>
+            <div>
+                <img src="">
+            </div>
             <div>1</div>
             <div>1</div>
             <div>1</div>
         </div>
     </div>
-    <div style="width: 400px; height: 1000px; background-color: gray; position: fixed; left: 62%">
+    <div class="recommend_follow">
         right 오른쪾 오른쪾
     </div>
 </div>
