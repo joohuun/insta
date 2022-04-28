@@ -37,7 +37,20 @@
     <style>
         .navbar navbar-expand-lg navbar-light bg-light {
             /*position: fixed;*/
-            width: 100%;
+            width: 100px;
+        }
+
+        .container-fluid {
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            min-width: 800px;
+            background-color: white;
+            position: fixed;
+            padding-top: 50px;
+            height: 12%;
+            border: solid 1px;
+            border-color: #e1dbdb;
+            border-radius: 3px;
         }
 
         .search-box {
@@ -47,28 +60,18 @@
             background-color: rgba(234, 224, 224, 0.72);
         }
 
-        .container-fluid {
-            justify-content: space-between;
-            flex-wrap: nowrap;
-            min-width: 800px;
-            background-color: blue;
-            position: fixed;
-            /*margin-top: px;*/
-            padding-top: 50px;
-            height: 15%;
-        }
-
         .main {
             display: flex;
             flex-direction: row;
             text-align: center;
             justify-content: center;
-            padding-top: 3.5%;
-            background-color: white
+            padding-top: 3.3%;
+            background-color: white;
+            /*margin-left: auto;*/
         }
 
         .card_wrap {
-            width: 600px;
+            width: 614px;
             height: 1000px;
             background-color: white;
             margin-right: 256px
@@ -77,7 +80,11 @@
         .cards {
             border: solid 1px;
             border-color: #e1dbdb;
-            border-radius: 3px
+            border-radius: 3px;
+            width: 614px;
+            height: 614px;
+            margin-right: 256px
+
         }
 
         .box {
@@ -105,28 +112,30 @@
             height: 1000px;
             background-color: gray;
             position: fixed;
-            left: 62%
+            left: 60%;
         }
-    /*테스트123*/
+
     </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img style="width: 100px"
-                 src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png">
-        </a>
-        <input class="search-box" type="search" placeholder="Search" aria-label="Search">
-        <div>
-            <span class="material-icons">home</span>
-            <span class="material-icons-outlined">send</span>
-            <span class="material-icons-outlined">add_box</span>
-            <span class="material-icons-outlined">explore</span>
-            <span class="material-icons-outlined">favorite_border</span>
-            <span class="material-icons-outlined">account_circle</span>
+<nav>
+    <div class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img style="width: 100px"
+                     src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png">
+            </a>
+            <input class="search-box" type="search" placeholder="Search" aria-label="Search">
+            <div>
+                <span class="material-icons">home</span>
+                <span class="material-icons-outlined">send</span>
+                <span class="material-icons-outlined">add_box</span>
+                <span class="material-icons-outlined">explore</span>
+                <span class="material-icons-outlined">favorite_border</span>
+                <span class="material-icons-outlined">account_circle</span>
+            </div>
         </div>
     </div>
 </nav>
@@ -144,7 +153,8 @@
                 </div>
             </div>
             <div>
-                <img src="">
+                <img style="width: 98%"
+                     src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220129_244%2F1643388623958mAqrn_JPEG%2F1593230565064.jpg&type=sc960_832">
             </div>
             <div>1</div>
             <div>1</div>
