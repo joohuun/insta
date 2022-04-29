@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Google icon -->
+    <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"-->
+    <!--          rel="stylesheet">-->
+    <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlinde"-->
+    <!--      rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css"
+          integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug=="
+          crossorigin="anonymous"/>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+
+    <title>무한스크롤</title>
+
+    <style>
+
+        .material-icons-outlined {
+            font-size: 29px
+        }
+
+        .navbar {
+            /*position: fixed;*/
+            /*width: 100px;*/
+            /*border: solid 3px;*/
+            /*border-color: #e1dbdb;*/
+            /*border-radius: 3px;*/
+        }
+
+        .container-fluid {
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            min-width: 800px;
+            background-color: white;
+            position: fixed;
+            padding-top: 50px;
+            height: 12%;
+            width: 100%;
+            border: solid 1px;
+            border-color: #e1dbdb;
+            border-radius: 3px;
+            /*justify-content: center;*/
+        }
+
+        .search-box {
+            width: 300px;
+            height: 37px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(234, 224, 224, 0.72);
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            justify-content: center;
+            padding-top: 3.3%;
+            background-color: white;
+            /*margin-left: auto;*/
+        }
+
+        .card_wrap {
+            width: 614px;
+            height: 2100px;
+            background-color: white;
+            margin-right: 256px
+        }
+
+        /*cards = top + mid + bottom + comment*/
+        .cards {
+            border: solid 1px;
+            border-color: #e1dbdb;
+            border-radius: 3px;
+            width: 614px;
+            /*height: 812px;*/
+            margin-right: 256px;
+            margin-bottom: 2%;
+        }
+
+        /*스토리 상단*/
+        .card_top {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        /*스토리 상단 프사틀*/
+        .box {
+            width: 50px;
+            height: 50px;
+            border-radius: 70%;
+            overflow: hidden;
+            margin: 1% 0 0 2.5%;
+        }
+
+        /*스토리 상단 프사*/
+        .profile_img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /*스토리 상단 프사 이름*/
+        .profile_name {
+            padding-left: 1.5%;
+        }
+
+        /*스토리 중단*/
+        .card_mid {
+            width: 614px;
+            height: 614px;
+        }
+
+        /*스토리 사진*/
+        .mid_img {
+            padding-top: 1%;
+            height: 614px;
+        }
+
+        .card_bottom {
+            height: 100px;
+        }
+
+        /*바텀 아이콘*/
+        .bottom_icons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-top: 1%;
+            padding-left: 2%;
+        }
+
+        /*바텀 북마크 아이콘*/
+        .bottom_icons_border {
+            padding-right: 2%;
+        }
+
+        /*팔로우 추천*/
+        .recommend_follow {
+            width: 293px;
+            height: 937px;
+            /*background-color: gray;*/
+            position: fixed;
+            left: 60%;
+        }
+
+        /*추천 상단*/
+        .recommend_follow_top {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 5%;
+        }
+
+        /*추천 상단 프사틀*/
+        .myprofile {
+            width: 50px;
+            height: 50px;
+            border-radius: 70%;
+            overflow: hidden;
+            margin: 1% 0 0 2.5%;
+        }
+
+        .myprofile_img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /*추천 상단 아이디 이름*/
+        .myprofile_ni {
+            padding-left: 3%;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .recommend_follow_mid {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 5%;
+            justify-content: space-between
+        }
+
+        /*추천 상단*/
+        .recommend_follow_bottom {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 5%;
+        }
+
+        /*추천 하단 프사틀*/
+        .fbprofile {
+            width: 37px;
+            height: 37px;
+            border-radius: 70%;
+            overflow: hidden;
+            margin: 1% 0 0 2.5%;
+        }
+
+        .fbprofile_img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /*추천 하단 아이디 이름*/
+        .fbprofile_ni {
+            padding-left: 3%;
+            font-size: 13px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="navbar">
+        <div class="container-fluid" style="justify-content: center">
+            <div style="margin-right:150px">
+                <a class="navbar-brand" href="#"> <!--인스타그램 로고-->
+                    <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png">
+                </a>
+            </div>
+            <div class="inputbox" style="margin-right:170px;">
+                <div style="margin-top: %">
+                    <i class="fas fa-search" style="font-size: 15px"></i>
+                    <input class="search-box" type="search" placeholder="검색" aria-label="search" style="border: none; ">
+                    <!--검색창-->
+                </div>
+            </div>
+            <div> <!--내비바 이이콘-->
+                <span class="material-icons-outlined">home</span>
+                <span class="material-icons-outlined">send</span>
+                <span class="material-icons-outlined">add_box</span>
+                <span class="material-icons-outlined">explore</span>
+                <span class="material-icons-outlined">favorite_border</span>
+                <span class="material-icons-outlined">account_circle</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="main">
+    <div class="card_wrap">
+        <section>
+        <div class="cards ">
+            <div class="card_top"> <!--스토리 상단-->
+                <div class="box"> <!--스토리 상단.프사틀-->
+                    <img class="profile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="profile_name"> <!--스토리 상단 프사 이름-->
+                    <b>JOOHUUN</b>
+                </div>
+            </div>
+            <div class="card_mid"> <!--스토리 중단-->
+                <div class="mid_img"> <!--스토리 중단.이미지-->
+                    <img style="width: 98%; height: 98%"
+                         src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220129_244%2F1643388623958mAqrn_JPEG%2F1593230565064.jpg&type=sc960_832">
+                </div>
+            </div>
+            <div class="card_bottom"> <!--스토리 하단-->
+                <div class="bottom_icons"> <!--스토리 하단 아이콘-->
+                    <div>
+                        <span class="material-icons-outlined">favorite_border</span>
+                        <span class="material-icons-outlined">mode_comment</span>
+                        <span class="material-icons-outlined">send</span>
+                    </div>
+                    <div class="bottom_icons_border">
+                        <span class="material-icons-outlined">bookmark_border</span>
+                    </div>
+                </div>
+                <div style="text-align: left; font-size:14px; padding-left: 2.5%">
+                    <b>좋아요 57개</b>
+                </div>
+                <div style="text-align: left; font-size:14px; padding: 1% 0 0 2.5%;">
+                    <b>JOOHUUN</b> 너무 맛있고~
+                </div>
+            </div>
+            <div class="comment">
+                <div style="border-top: solid 1px #e1dbdb">
+                    <input type="text" class="form-control" placeholder="댓글달기..."
+                           style="box-shadow: none; padding-top:2%; border: none; outline: none">
+                </div>
+            </div>
+        </div>
+        <div class="cards ">
+            <div class="card_top"> <!--스토리 상단-->
+                <div class="box"> <!--스토리 상단.프사틀-->
+                    <img class="profile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="profile_name"> <!--스토리 상단 프사 이름-->
+                    <b>JOOHUUN</b>
+                </div>
+            </div>
+            <div class="card_mid"> <!--스토리 중단-->
+                <div class="mid_img"> <!--스토리 중단.이미지-->
+                    <img style="width: 98%; height: 98%"
+                         src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220129_244%2F1643388623958mAqrn_JPEG%2F1593230565064.jpg&type=sc960_832">
+                </div>
+            </div>
+            <div class="card_bottom"> <!--스토리 하단-->
+                <div class="bottom_icons"> <!--스토리 하단 아이콘-->
+                    <div>
+                        <span class="material-icons-outlined">favorite_border</span>
+                        <span class="material-icons-outlined">mode_comment</span>
+                        <span class="material-icons-outlined">send</span>
+                    </div>
+                    <div class="bottom_icons_border">
+                        <span class="material-icons-outlined">bookmark_border</span>
+                    </div>
+                </div>
+                <div style="text-align: left; font-size:14px; padding-left: 2.5%">
+                    <b>좋아요 57개</b>
+                </div>
+                <div style="text-align: left; font-size:14px; padding: 1% 0 0 2.5%;">
+                    <b>JOOHUUN</b> 너무 맛있고~
+                </div>
+            </div>
+            <div class="comment">
+                <div style="border-top: solid 1px #e1dbdb">
+                    <input type="text" class="form-control" placeholder="댓글달기..."
+                           style="box-shadow: none; padding-top:2%; border: none; outline: none">
+                </div>
+            </div>
+        </div>
+        </section>
+    </div>
+
+    <script>
+    var count = 10;
+    window.onscroll = function (e) {
+        console.log(window.innerHeight, window.scrollY, document.body.offsetHeight)
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            setTimeout(function () {
+                var addContent = document.createElement("div");
+                addContent.classList.add("cards")
+                addContent.innerHTML = `        <div class="cards ">
+            <div class="card_top"> <!--스토리 상단-->
+                <div class="box"> <!--스토리 상단.프사틀-->
+                    <img class="profile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="profile_name"> <!--스토리 상단 프사 이름-->
+                    <b>JOOHUUN</b>
+                </div>
+            </div>
+            <div class="card_mid"> <!--스토리 중단-->
+                <div class="mid_img"> <!--스토리 중단.이미지-->
+                    <img style="width: 98%; height: 98%"
+                         src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220129_244%2F1643388623958mAqrn_JPEG%2F1593230565064.jpg&type=sc960_832">
+                </div>
+            </div>
+            <div class="card_bottom"> <!--스토리 하단-->
+                <div class="bottom_icons"> <!--스토리 하단 아이콘-->
+                    <div>
+                        <span class="material-icons-outlined">favorite_border</span>
+                        <span class="material-icons-outlined">mode_comment</span>
+                        <span class="material-icons-outlined">send</span>
+                    </div>
+                    <div class="bottom_icons_border">
+                        <span class="material-icons-outlined">bookmark_border</span>
+                    </div>
+                </div>
+                <div style="text-align: left; font-size:14px; padding-left: 2.5%">
+                    <b>좋아요 57개</b>
+                </div>
+                <div style="text-align: left; font-size:14px; padding: 1% 0 0 2.5%;">
+                    <b>JOOHUUN</b> 너무 맛있고~
+                </div>
+            </div>
+            <div class="comment">
+                <div style="border-top: solid 1px #e1dbdb">
+                    <input type="text" class="form-control" placeholder="댓글달기..."
+                           style="box-shadow: none; padding-top:2%; border: none; outline: none">
+                </div>
+            </div>
+        </div>
+`                // addContent.innerHTML = `<p>${++count}번째 블록</p>`
+                document.querySelector('section').appendChild(addContent);
+            }, 200)
+        }
+    }
+</script>
+
+    <!--------------------------------------팔로우 추천---------------------------------------------------------------------->
+    <div class="recommend_follow">
+        <!--------------------------------------------------------------------------------------------------------------------->
+        <div class="recommend_follow_top"> <!--추천 상단-->
+            <div class="myprofile"> <!--추천 상단 프사틀-->
+                <img class="myprofile_img"
+                     src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+            </div>
+            <div class="myprofile_ni"> <!--추천 상단 아이디,이름-->
+                <div class="myprofile_id"> <!--추천 상단 아이디-->
+                    <b>JOOHUUN</b>
+                </div>
+                <div style="color: gray"> <!--스토리 이름-->
+                    JuhoonKim
+                </div>
+            </div>
+            <div style="margin-left: 40%;"> <!--추천 상단 전환-->
+                <button style="color:skyblue; background-color: white; border: none; font-size: 12px">전환</button>
+            </div>
+        </div>
+        <!--------------------------------------------------------------------------------------------------------------------->
+        <div class="recommend_follow_mid">
+            <div style="color:gray; font-size: 14px; padding-left: 5%">
+                회원님을 위한 추천
+            </div>
+            <div>
+                <button style="font-size:14px; color: black; background-color: white; border: none;"><b>모두 보기</b>
+                </button>
+            </div>
+        </div>
+        <!--------------------------------------------------------------------------------------------------------------------->
+        <div> <!--팔로우 추천들 모음-->
+            <div class="recommend_follow_bottom"> <!--추천 하단-->
+                <div class="fbprofile"> <!--추천 하단 프사틀-->
+                    <img class="fbprofile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="fbprofile_ni"> <!--추천 하단 아이디,이름-->
+                    <div class="fbprofile_id"> <!--추천 하단 아이디-->
+                        <b>JOOHUUN</b>
+                    </div>
+                    <div style="color: gray"> <!--추천 하단 이름-->
+                        JuhoonKim
+                    </div>
+                </div>
+                <div style="margin-left: 40%;"> <!--추천 하단 팔로우-->
+                    <button style="color:skyblue; background-color: white; border: none; font-size: 12px">팔로우</button>
+                </div>
+            </div>
+            <div class="recommend_follow_bottom"> <!--추천 하단-->
+                <div class="fbprofile"> <!--추천 하단 프사틀-->
+                    <img class="fbprofile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="fbprofile_ni"> <!--추천 하단 아이디,이름-->
+                    <div class="fbprofile_id"> <!--추천 하단 아이디-->
+                        <b>JOOHUUN</b>
+                    </div>
+                    <div style="color: gray"> <!--추천 하단 이름-->
+                        JuhoonKim
+                    </div>
+                </div>
+                <div style="margin-left: 40%;"> <!--추천 하단 팔로우-->
+                    <button style="color:skyblue; background-color: white; border: none; font-size: 12px">팔로우</button>
+                </div>
+            </div>
+            <div class="recommend_follow_bottom"> <!--추천 하단-->
+                <div class="fbprofile"> <!--추천 하단 프사틀-->
+                    <img class="fbprofile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="fbprofile_ni"> <!--추천 하단 아이디,이름-->
+                    <div class="fbprofile_id"> <!--추천 하단 아이디-->
+                        <b>JOOHUUN</b>
+                    </div>
+                    <div style="color: gray"> <!--추천 하단 이름-->
+                        JuhoonKim
+                    </div>
+                </div>
+                <div style="margin-left: 40%;"> <!--추천 하단 팔로우-->
+                    <button style="color:skyblue; background-color: white; border: none; font-size: 12px">팔로우</button>
+                </div>
+            </div>
+            <div class="recommend_follow_bottom"> <!--추천 하단-->
+                <div class="fbprofile"> <!--추천 하단 프사틀-->
+                    <img class="fbprofile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="fbprofile_ni"> <!--추천 하단 아이디,이름-->
+                    <div class="fbprofile_id"> <!--추천 하단 아이디-->
+                        <b>JOOHUUN</b>
+                    </div>
+                    <div style="color: gray"> <!--추천 하단 이름-->
+                        JuhoonKim
+                    </div>
+                </div>
+                <div style="margin-left: 40%;"> <!--추천 하단 팔로우-->
+                    <button style="color:skyblue; background-color: white; border: none; font-size: 12px">팔로우</button>
+                </div>
+            </div>
+            <div class="recommend_follow_bottom"> <!--추천 하단-->
+                <div class="fbprofile"> <!--추천 하단 프사틀-->
+                    <img class="fbprofile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="fbprofile_ni"> <!--추천 하단 아이디,이름-->
+                    <div class="fbprofile_id"> <!--추천 하단 아이디-->
+                        <b>JOOHUUN</b>
+                    </div>
+                    <div style="color: gray"> <!--추천 하단 이름-->
+                        JuhoonKim
+                    </div>
+                </div>
+                <div style="margin-left: 40%;"> <!--추천 하단 팔로우-->
+                    <button style="color:skyblue; background-color: white; border: none; font-size: 12px">팔로우</button>
+                </div>
+            </div>
+            <div class="recommend_follow_bottom"> <!--추천 하단-->
+                <div class="fbprofile"> <!--추천 하단 프사틀-->
+                    <img class="fbprofile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="fbprofile_ni"> <!--추천 하단 아이디,이름-->
+                    <div class="fbprofile_id"> <!--추천 하단 아이디-->
+                        <b>JOOHUUN</b>
+                    </div>
+                    <div style="color: gray"> <!--추천 하단 이름-->
+                        JuhoonKim
+                    </div>
+                </div>
+                <div style="margin-left: 40%;"> <!--추천 하단 팔로우-->
+                    <button style="color:skyblue; background-color: white; border: none; font-size: 12px">팔로우</button>
+                </div>
+            </div>
+            <div class="recommend_follow_bottom"> <!--추천 하단-->
+                <div class="fbprofile"> <!--추천 하단 프사틀-->
+                    <img class="fbprofile_img"
+                         src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMDdfMjE3%2FMDAxNjM2Mjc3MjU5MTQy.ltys7zGqWWmUxzrVEz87nfkV8wWl3vYeYHntA7mrHNwg.E6sJDDY45FRqoZx0Vz7E8-Urz6RWj2YIqWcBU39_Y1Ug.JPEG.thisismeji617%2FIMG_0519.JPG&type=sc960_832">
+                </div>
+                <div class="fbprofile_ni"> <!--추천 하단 아이디,이름-->
+                    <div class="fbprofile_id"> <!--추천 하단 아이디-->
+                        <b>JOOHUUN</b>
+                    </div>
+                    <div style="color: gray"> <!--추천 하단 이름-->
+                        JuhoonKim
+                    </div>
+                </div>
+                <div style="margin-left: 40%;"> <!--추천 하단 팔로우-->
+                    <button style="color:skyblue; background-color: white; border: none; font-size: 12px">팔로우</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: left; margin-left: 2%; font-size: 12px">
+            <div>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">소개</span></a>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">도움말</span></a>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">홍보 센터</span></a>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">API</span></a>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">채용 정보</span></a>
+            </div>
+            <div>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">개인정보처리방침</span></a>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">약관</span></a>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">위치</span></a>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">인기 계정</span></a>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">해시태그</span></a>
+            </div>
+            <div>
+                <a href="https://www.instagram.com/" style="text-decoration:none"><span
+                        style="color: #d7c6c6">언어</span></a>
+            </div>
+            <div style="text-align: left; margin-left: 1%; margin-top: 5%">
+                <span style="color: #d7c6c6; font-size: 12px; ">© 2022 INSTAGRAM FROM META</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!--</div>-->
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
